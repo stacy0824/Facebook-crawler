@@ -47,7 +47,7 @@
    
 **2. selenium**
 
-   程式使用selenium進行爬蟲，故需安裝此套件
+   程式使用selenium套件進行爬蟲
 
    ```python
    pip install selenium
@@ -55,8 +55,16 @@
    
 **3. pandas**
    
-   將抓取的貼文及留言使用pandas以Dataframe儲存成csv檔，故需安裝此套件
+   將抓取的貼文及留言使用pandas以Dataframe儲存成csv檔
    
    ```python
    pip install pandas
+   ```
+   
+**4. beautifulsoup4**
+   
+   此程式碼利用Beautifulsoup讀取HTML原始碼及進行解析
+   
+   ```python
+   pip install beautifulsoup4
    ```
