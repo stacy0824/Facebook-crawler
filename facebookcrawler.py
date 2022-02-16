@@ -6,7 +6,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 
-# 網站
+
 URL = "https://www.facebook.com/groups/1260448967306807"
 # 使用ChromeDriverManager自動下載chromedriver
 driver = webdriver.Chrome(ChromeDriverManager().install())
@@ -14,11 +14,10 @@ driver.maximize_window()
 driver.get(URL)
 time.sleep(10)
 
-# 計算全部全部迴圈的次數
 switch = True
+# 計算全部迴圈(貼文)的次數
 allPostCounts = 0
 
-# 視窗拉到底部執行3次
 for x in range(3):
     driver.execute_script("window.scrollTo(0,document.body.scrollHeight)")
     print("Scroll")
@@ -31,7 +30,7 @@ while switch:
     dataRow = 0
     df = pd.DataFrame(columns=["POST", "MESSAGE"])
 
-    # 計算當次迴圈的次數
+    # 計算當次迴圈(貼文)次數
     postCounts = 0
 
     # 展開貼文
@@ -93,6 +92,7 @@ while switch:
                             "buofh1pr.g5gj957u.p8fzw8mz.gpro0wi8",
                         )
 
+                        # 同個classc同時是展開留言及隱藏留言的按鈕，故利用文字來區分展開及隱藏
                         hideMessage = 0
                         if str("隱藏") in moreMessage.text:
                             hideMessage += 1
@@ -174,13 +174,12 @@ while switch:
     df.to_csv(r"./fabebookcrawler.csv", encoding="utf-8")
     print("----------save rawdata----------")
 
-    # 視窗拉到底部3次
     for x in range(2):
         driver.execute_script("window.scrollTo(0,document.body.scrollHeight)")
         print("Scroll")
         time.sleep(random.randint(5, 20))
 
-    # 出現unloginError時停止
+    # 檢視未登入窗格，若出現unloginError時停止
     try:
         unloginError = driver.find_element(
             By.CLASS_NAME,
@@ -221,7 +220,5 @@ while switch:
     except Exception:
         switch = False
 
-# 等待10秒
 time.sleep(10)
-# 關閉瀏覽器
 driver.quit()
